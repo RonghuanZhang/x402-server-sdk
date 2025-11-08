@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>x402-spring-boot-starter</artifactId>
-  <packaging>pom</packaging>
+  <packaging>jar</packaging>
 
   <name>X402 Spring Boot Starter</name>
   <description>Starter for X402 payment interceptor auto-configuration</description>
