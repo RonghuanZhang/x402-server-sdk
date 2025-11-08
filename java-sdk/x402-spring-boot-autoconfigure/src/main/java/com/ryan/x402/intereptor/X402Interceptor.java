@@ -64,7 +64,7 @@ public class X402Interceptor implements HandlerInterceptor {
       return true;
     }
 
-    String path = request.getRequestURI();
+    String path = request.getRequestURL().toString();
     PaymentRequirements requirements = buildRequirements(path, annotation);
 
     String header = request.getHeader("X-PAYMENT");
@@ -200,6 +200,7 @@ public class X402Interceptor implements HandlerInterceptor {
     pr.network = network;
     pr.maxAmountRequired = priceDecimal.toPlainString();
     pr.asset = asset;
+    pr.description = "";
     pr.resource = path;
     pr.mimeType = "application/json";
     pr.payTo = payTo;
@@ -208,7 +209,7 @@ public class X402Interceptor implements HandlerInterceptor {
     // TODO only support USDC
     extra.put("name", "USDC");
     extra.put("version", "2");
-    pr.outputSchema = extra;
+    pr.outputSchema = new HashMap<>();
     pr.extra = extra;
     return pr;
   }
