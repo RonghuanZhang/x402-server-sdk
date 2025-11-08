@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import org.springframework.lang.Nullable;
@@ -68,7 +69,7 @@ public class X402Interceptor implements HandlerInterceptor {
 
     String header = request.getHeader("X-PAYMENT");
     if (!StringUtils.hasText(header)) {
-      respond402(response, requirements, null);
+      respond402(response, requirements, "X-PAYMENT header is required");
       return false;
     }
 
@@ -203,6 +204,8 @@ public class X402Interceptor implements HandlerInterceptor {
     pr.mimeType = "application/json";
     pr.payTo = payTo;
     pr.maxTimeoutSeconds = maxTimeoutSeconds;
+    pr.outputSchema = new HashMap<>();
+    pr.extra = new HashMap<>();
     return pr;
   }
 
