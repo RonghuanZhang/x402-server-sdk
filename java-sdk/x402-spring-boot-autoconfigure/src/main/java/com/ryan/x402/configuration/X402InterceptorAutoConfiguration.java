@@ -18,15 +18,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ConditionalOnProperty(prefix = "x402", name = "enabled", havingValue = "true")
 public class X402InterceptorAutoConfiguration {
 
-  private final X402Configuration properties;
-  private final FacilitatorClient facilitatorClient;
-
-  public X402InterceptorAutoConfiguration(X402Configuration properties,
-      FacilitatorClient facilitatorClient) {
-    this.properties = properties;
-    this.facilitatorClient = facilitatorClient;
-  }
-
   @ConditionalOnMissingBean
   @Bean
   public FacilitatorClient x402FacilitatorClient(X402Configuration props) {
