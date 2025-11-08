@@ -35,7 +35,7 @@ public class X402Interceptor implements HandlerInterceptor {
 
   private final String defaultPayTo;
   private final String network;            // e.g. "base-sepolia"
-  private final String asset;              // e.g. "USDC"
+  private final String asset;              // e.g.  "0x..."
   private final int maxTimeoutSeconds;  // e.g. 30
   private final FacilitatorClient facilitator;
 
@@ -204,8 +204,12 @@ public class X402Interceptor implements HandlerInterceptor {
     pr.mimeType = "application/json";
     pr.payTo = payTo;
     pr.maxTimeoutSeconds = maxTimeoutSeconds;
-    pr.outputSchema = new HashMap<>();
-    pr.extra = new HashMap<>();
+    HashMap<String, Object> extra = new HashMap<>();
+    // TODO only support USDC
+    extra.put("name", "USDC");
+    extra.put("version", "2");
+    pr.outputSchema = extra;
+    pr.extra = extra;
     return pr;
   }
 
